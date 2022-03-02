@@ -10,7 +10,6 @@ app.use(cors())
 router(app)
 
 app.listen(config.PORT, () => {
-    ç
     console.log(`App running at http://localhost:${config.PORT}`)
 })
 
