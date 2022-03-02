@@ -30,8 +30,8 @@ async function getBirthdayInfo(month, day, year) {
 
     let requestObj = { dayStr: `${day}`, getCountry: "0", monthStr: `${month}`, yearStr: `${year}` }
     let mybirthdayfacts = await dependencies.axios.post('https://www.mybirthdayfacts.com/MBFService.asmx/FetchDayHeadlines', requestObj, { headers: { 'Content-Type': 'application/json' } })
-    let famousBornOnBirthday = await dependencies.axios.get(`https://playback.fm/ajax/celebrity-birthdays?month=${month}&day=${day}`, { 'Content-Type': 'application/json', 'Host': "127.0.0.1" })
-    console.log('Inicio debug', famousBornOnBirthday.request._header, 'Fin debug')
+    let famousBornOnBirthday = await dependencies.axios.get(`https://playback.fm/ajax/celebrity-birthdays?month=${month}&day=${day}`, { headers: { 'Content-Type': 'application/json', 'host': "playback.fm" } })
+    console.log('Inicio debug', famousBornOnBirthday, 'Fin debug')
     birthdayInfo['famous'] = {
         image: famousBornOnBirthday.data.img,
         names: famousBornOnBirthday.data.names[0],
