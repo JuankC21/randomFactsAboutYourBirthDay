@@ -12,3 +12,5 @@ router(app)
 app.listen(config.PORT, () => {
     console.log(`App running at http://localhost:${config.PORT}`)
 })
+
+console.log('The used host is', config.HOST)

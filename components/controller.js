@@ -1,5 +1,6 @@
 const dependencies = require('../dependencies')
 const whatDidHubbleSeeInfo = require('../whatDidHubbleSee.json')
+const config = require('../config')
 
 const months = {
     '1': 'January',
@@ -29,15 +30,16 @@ async function getBirthdayInfo(month, day, year) {
 
     let requestObj = { dayStr: `${day}`, getCountry: "0", monthStr: `${month}`, yearStr: `${year}` }
     let mybirthdayfacts = await dependencies.axios.post('https://www.mybirthdayfacts.com/MBFService.asmx/FetchDayHeadlines', requestObj, { headers: { 'Content-Type': 'application/json' } })
-        /*     let famousBornOnBirthday = await dependencies.axios.get(`https://playback.fm/ajax/celebrity-birthdays?month=${month}&day=${day}`,{'Content-Type': 'application/json'})
+    let famousBornOnBirthday = await dependencies.axios.get(`https://playback.fm/ajax/celebrity-birthdays?month=${month}&day=${day}`, { 'Content-Type': 'application/json', 'Host': config.HOST })
 
-            birthdayInfo['famous'] = {
-                image: famousBornOnBirthday.data.img,
-                names: famousBornOnBirthday.data.names[0],
-                birthDate: famousBornOnBirthday.data.birthdate,
-                birthPlace: famousBornOnBirthday.data.birthplaces[0],
-                occupations: famousBornOnBirthday.data.occupations
-            } */
+    birthdayInfo['famous'] = {
+        image: famousBornOnBirthday.data.img,
+        names: famousBornOnBirthday.data.names[0],
+        birthDate: famousBornOnBirthday.data.birthdate,
+        birthPlace: famousBornOnBirthday.data.birthplaces[0],
+        occupations: famousBornOnBirthday.data.occupations
+    }
+
     for (let n = 0; n < mybirthdayfacts.data.d.length; n++) {
 
         if (mybirthdayfacts.data.d[n].i == 0) {
